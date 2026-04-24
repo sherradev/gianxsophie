@@ -1,18 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useTransform, AnimatePresence, useInView } from "framer-motion";
-
-// ─── Palette from the Pantone board ───────────────────────────────────────────
-const C = {
-  babyPowder:   "#F5F3EE",
-  blushingBride:"#E8A9B8",
-  crushedBerry: "#7B3A4A",
-  limeCream:    "#D8E8C2",
-  sweetPea:     "#8FAB6A",
-  dustyBlue:    "#8BA5B4",
-  deepSlate:    "#3D5460",
-  offWhite:     "#FAF8F4",
-  warmGrey:     "#9E9189",
-};
+import { FadeUp } from "./components/FadeUp";
+import DressCodeSection from "./Pages/DressCode";  
+import { COLOR_PALETTES as C } from "./utils/global"; 
 
 // ─── Botanical SVG decorations ─────────────────────────────────────────────────
 const BotanicalLeft = ({ style = {} }) => (
@@ -76,43 +66,7 @@ const FloralDivider = () => (
     <div style={{ height: 1, width: 80, background: `linear-gradient(to left, transparent, ${C.blushingBride})` }} />
   </div>
 );
-
-// ─── Monogram ──────────────────────────────────────────────────────────────────
-const Monogram = () => (
-  <svg width="90" height="90" viewBox="0 0 90 90">
-    <circle cx="45" cy="45" r="42" stroke={C.blushingBride} strokeWidth="1" fill="none" />
-    <circle cx="45" cy="45" r="38" stroke={C.blushingBride} strokeWidth="0.5" fill="none" opacity="0.5"/>
-    {/* G */}
-    <text x="22" y="58" fontFamily="'Cormorant Garamond', serif" fontSize="38" fill={C.crushedBerry} opacity="0.9" fontStyle="italic">G</text>
-    {/* & */}
-    <text x="39" y="54" fontFamily="'Cormorant Garamond', serif" fontSize="18" fill={C.blushingBride} fontStyle="italic">＆</text>
-    {/* S */}
-    <text x="50" y="58" fontFamily="'Cormorant Garamond', serif" fontSize="38" fill={C.crushedBerry} opacity="0.9" fontStyle="italic">S</text>
-    {/* Small florals at corners */}
-    <circle cx="45" cy="5" r="2.5" fill={C.sweetPea} opacity="0.7"/>
-    <circle cx="45" cy="85" r="2.5" fill={C.sweetPea} opacity="0.7"/>
-    <circle cx="5" cy="45" r="2.5" fill={C.sweetPea} opacity="0.7"/>
-    <circle cx="85" cy="45" r="2.5" fill={C.sweetPea} opacity="0.7"/>
-  </svg>
-);
-
-// ─── Fade-in-up hook ───────────────────────────────────────────────────────────
-const FadeUp = ({ children, delay = 0, style = {} }) => {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] }}
-      style={style}
-    >
-      {children}
-    </motion.div>
-  );
-};
-
+ 
 // ─── Nav ───────────────────────────────────────────────────────────────────────
 const Nav = ({ active }) => {
   const links = ["Home", "Details", "FAQs", "RSVP"];
@@ -246,14 +200,7 @@ const HeroSection = () => {
         >
           In God's perfect time
         </motion.p>
-
-        {/* Monogram */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.2, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          style={{ display: "flex", justifyContent: "center", marginBottom: 32 }}
-        >
-          <Monogram />
-        </motion.div>
+ 
 
         {/* Names */}
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}>
@@ -356,37 +303,7 @@ const DetailsSection = () => (
       <FloralDivider />
 
       {/* Dress code */}
-      <FadeUp delay={0.2}>
-        <div style={{
-          border: `1px solid ${C.blushingBride}66`, borderRadius: 4, padding: "40px 48px",
-          textAlign: "center", background: `${C.babyPowder}88`, position: "relative",
-        }}>
-          <p style={{ fontFamily: "'Jost', sans-serif", fontSize: 10, letterSpacing: "0.35em", textTransform: "uppercase", color: C.warmGrey, marginBottom: 12 }}>
-            Dress Code
-          </p>
-          <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 32, fontWeight: 400, color: C.crushedBerry, margin: "0 0 20px", fontStyle: "italic" }}>
-            Formal Attire
-          </h3>
-          <div style={{ display: "flex", gap: 40, justifyContent: "center", flexWrap: "wrap" }}>
-            {[
-              { role: "Gentlemen", guide: "Suit & Tie" },
-              { role: "Ladies", guide: "Long Gown / Cocktail Dress" },
-            ].map(({ role, guide }) => (
-              <div key={role}>
-                <p style={{ fontFamily: "'Jost', sans-serif", fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", color: C.deepSlate, margin: "0 0 4px" }}>{role}</p>
-                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 18, color: C.warmGrey, fontStyle: "italic", margin: 0 }}>{guide}</p>
-              </div>
-            ))}
-          </div>
-          {/* Color swatches */}
-          <div style={{ display: "flex", gap: 10, justifyContent: "center", marginTop: 24, alignItems: "center" }}>
-            <span style={{ fontFamily: "'Jost', sans-serif", fontSize: 10, letterSpacing: "0.2em", textTransform: "uppercase", color: C.warmGrey }}>in shades of</span>
-            {[C.dustyBlue, C.sweetPea, C.blushingBride, C.limeCream].map((c, i) => (
-              <div key={i} style={{ width: 20, height: 20, borderRadius: "50%", background: c, border: `1px solid ${C.warmGrey}33` }} />
-            ))}
-          </div>
-        </div>
-      </FadeUp>
+      <DressCodeSection/>
 
       {/* Principal sponsors note */}
       <FadeUp delay={0.3} style={{ textAlign: "center", marginTop: 48 }}>
@@ -512,8 +429,7 @@ const RSVPSection = () => {
               key="thanks"
               initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               style={{ textAlign: "center", padding: "60px 32px", border: `1px solid ${C.blushingBride}66`, borderRadius: 4, background: `${C.babyPowder}99` }}
-            >
-              <Monogram />
+            > 
               <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 34, fontWeight: 300, color: C.crushedBerry, margin: "24px 0 12px", fontStyle: "italic" }}>
                 Thank you, {form.name.split(" ")[0]}!
               </h3>
@@ -582,21 +498,7 @@ const RSVPSection = () => {
             </motion.div>
           )}
         </AnimatePresence>
-
-        {/* Contact numbers */}
-        <FadeUp delay={0.3} style={{ textAlign: "center", marginTop: 52 }}>
-          <p style={{ fontFamily: "'Jost', sans-serif", fontSize: 10, letterSpacing: "0.25em", textTransform: "uppercase", color: C.warmGrey, marginBottom: 12 }}>
-            Or reach us directly
-          </p>
-          <div style={{ display: "flex", gap: 32, justifyContent: "center", flexWrap: "wrap" }}>
-            {[["Sophie", "+63 912 345 6789"], ["Gian", "+63 998 765 4321"]].map(([name, num]) => (
-              <div key={name} style={{ textAlign: "center" }}>
-                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 18, color: C.crushedBerry, fontStyle: "italic", margin: "0 0 4px" }}>{name}</p>
-                <p style={{ fontFamily: "'Jost', sans-serif", fontSize: 13, color: C.deepSlate, margin: 0 }}>{num}</p>
-              </div>
-            ))}
-          </div>
-        </FadeUp>
+ 
       </div>
     </section>
   );
@@ -605,7 +507,7 @@ const RSVPSection = () => {
 // ─── Footer ────────────────────────────────────────────────────────────────────
 const Footer = () => (
   <footer style={{ background: C.deepSlate, padding: "56px 24px", textAlign: "center" }}>
-    <Monogram />
+ 
     <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 22, color: C.blushingBride, fontStyle: "italic", margin: "20px 0 8px" }}>
       Gian &amp; Sophie
     </p>
