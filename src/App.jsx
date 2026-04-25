@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform, AnimatePresence, useInView } from "fra
 import { FadeUp } from "./components/FadeUp";
 import DressCodeSection from "./Pages/DressCode";  
 import { COLOR_PALETTES as C } from "./utils/global"; 
+import heroImage from './assets/gxs_hero2.webp'
 
 // ─── Botanical SVG decorations ─────────────────────────────────────────────────
 const BotanicalLeft = ({ style = {} }) => (
@@ -194,17 +195,11 @@ const HeroSection = () => {
 
       <motion.div style={{ opacity, textAlign: "center", zIndex: 2, padding: "80px 24px 60px" }}>
         {/* Pre-title */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.2 }}
-          style={{ fontFamily: "'Jost', sans-serif", fontSize: 10, letterSpacing: "0.35em", textTransform: "uppercase", color: C.warmGrey, marginBottom: 32 }}
-        >
-          In God's perfect time
-        </motion.p>
  
 
         {/* Names */}
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}>
-          <h1 style={{
+          {/* <h1 style={{
             fontFamily: "'Cormorant Garamond', serif",
             fontSize: "clamp(52px, 10vw, 110px)",
             fontWeight: 300, letterSpacing: "0.05em",
@@ -222,12 +217,28 @@ const HeroSection = () => {
             color: C.deepSlate, lineHeight: 0.9, margin: 0,
           }}>
             Sophie
-          </h1>
+          </h1> */}
+
+
+         <img 
+    src={heroImage} 
+    fetchpriority="high"  
+    style={{
+    width: '100%',
+    maxWidth: '600px', // Adjust this number to make it smaller/larger
+    height: 'auto',
+    display: 'block',
+    margin: '0 auto',  // Centers the image
+    borderRadius: '8px' // Optional: adds a nice soft corner
+  }}
+    alt="Gian and Sophie"
+  />
         </motion.div>
 
         <motion.p
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 1 }}
-          style={{ fontFamily: "'Jost', sans-serif", fontSize: 11, letterSpacing: "0.3em", textTransform: "uppercase", color: C.warmGrey, margin: "28px 0 8px" }}
+          style={{ fontFamily: "'Jost', sans-serif", fontSize: 17, letterSpacing: "0.3em", 
+            textTransform: "uppercase", color: C.warmGrey, margin: "-20px 0 10px 25px" }}
         >
           are getting married
         </motion.p>
@@ -293,11 +304,11 @@ const DetailsSection = () => (
 
       {/* Cards row */}
       <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 8 }}>
-        <DetailCard icon="📅" title="Date" lines={["Thursday", "4th of January, 2024", "Two thousand twenty four"]} delay={0.1} />
+        <DetailCard icon="📅" title="Date" lines={["Thursday", "4th of January, 2027", "Two thousand twenty four"]} delay={0.1} />
         <div style={{ width: 1, background: `${C.blushingBride}44`, margin: "40px 0", alignSelf: "stretch" }} className="divider-line" />
         <DetailCard icon="⏰" title="Time" lines={["Three o'clock", "in the afternoon", "Cocktails & Dinner to follow"]} delay={0.2} />
         <div style={{ width: 1, background: `${C.blushingBride}44`, margin: "40px 0", alignSelf: "stretch" }} className="divider-line" />
-        <DetailCard icon="📍" title="Venue" lines={["The View Davao", "Magtuod, Davao City"]} delay={0.3} />
+        <DetailCard icon="📍" title="Venue" lines={["Dumaguete City"]} delay={0.3} />
       </div>
 
       <FloralDivider />
@@ -306,12 +317,12 @@ const DetailsSection = () => (
       <DressCodeSection/>
 
       {/* Principal sponsors note */}
-      <FadeUp delay={0.3} style={{ textAlign: "center", marginTop: 48 }}>
+      {/* <FadeUp delay={0.3} style={{ textAlign: "center", marginTop: 48 }}>
         <p style={{ fontFamily: "'Jost', sans-serif", fontSize: 10, letterSpacing: "0.35em", textTransform: "uppercase", color: C.warmGrey, marginBottom: 8 }}>Principal Sponsors</p>
         <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 17, color: C.deepSlate, fontStyle: "italic" }}>
           Ninong: Barong and black slacks &nbsp;·&nbsp; Ninang: Beige long gown
         </p>
-      </FadeUp>
+      </FadeUp> */}
     </div>
     <style>{`.divider-line { display: block; } @media(max-width:640px){.divider-line{display:none!important;}}`}</style>
   </section>
@@ -357,7 +368,7 @@ const Accordion = ({ q, a, index }) => {
 const FAQsSection = () => {
   const faqs = [
     { q: "When is the RSVP deadline?", a: "Please RSVP by December 25, 2023. This helps us finalise seating and catering. We appreciate your prompt response!" },
-    { q: "Is there parking available at the venue?", a: "Yes, The View Davao has ample parking available for all guests. Our team will be on hand to assist with directions on the day." },
+    { q: "Is there parking available at the venue?", a: "Yes, Dumaguete City has ample parking available for all guests. Our team will be on hand to assist with directions on the day." },
     { q: "Will there be a reception after the ceremony?", a: "Absolutely! Cocktails and a dinner reception will follow immediately after the ceremony. Please stay and celebrate with us!" },
     { q: "Can I bring a plus-one?", a: "Your invitation will specify whether it is for one or two guests. If you are unsure, please reach out to us directly via the contact numbers below." },
     { q: "What is the colour palette for the event?", a: "We are keeping things soft and romantic — dusty blue, sage green, blush, and hints of berry. Ladies are welcome to wear long gowns or cocktail dresses in these tones." },
@@ -512,7 +523,7 @@ const Footer = () => (
       Gian &amp; Sophie
     </p>
     <p style={{ fontFamily: "'Jost', sans-serif", fontSize: 10, letterSpacing: "0.25em", textTransform: "uppercase", color: `${C.babyPowder}55`, margin: 0 }}>
-      4th of January, 2024 · The View Davao
+      4th of January, 2027 · Dumaguete City
     </p>
   </footer>
 );
@@ -552,8 +563,7 @@ export default function App() {
       <Nav active={active} />
       <HeroSection />
       <DetailsSection />
-      <FAQsSection />
-      <RSVPSection />
+      <FAQsSection /> 
       <Footer />
     </>
   );

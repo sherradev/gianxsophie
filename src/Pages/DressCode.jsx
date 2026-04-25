@@ -19,7 +19,6 @@ const DressCodeSection = () => {
           borderRadius: 4,
           padding: "40px 48px",
           textAlign: "center",
-          background: `${C.babyPowder}88`,
         }}
       >
         <p
@@ -56,8 +55,8 @@ const DressCodeSection = () => {
           }}
         >
           {[
-            ["Gentlemen", "Suit & Tie"],
-            ["Ladies", "Long Gown / Cocktail Dress"],
+            ["Gentlemen", "Semi-Formal"],
+            ["Ladies", "Cocktail Dress"],
           ].map(([role, guide]) => (
             <div key={role}>
               <p
