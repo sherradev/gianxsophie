@@ -5,6 +5,7 @@ import { FadeUp } from "../components/FadeUp";
 const DressCodeSection = () => {
   const swatches = [
     { name: "Baby Powder", code: "11-0501 TSX", color: C.babyPowder, border: true },
+    { name: "Bone White", code: "12-0105 TPG", color: C.boneWhite, border: true },
     { name: "Blushing Bride", code: "12-1310 TCX", color: C.blushingBride },
     { name: "Crushed Berry", code: "18-1418 TCX", color: C.crushedBerry },
     { name: "Lime Cream", code: "12-0312 TCX", color: C.limeCream },

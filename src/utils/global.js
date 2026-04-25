@@ -1,5 +1,6 @@
 export const COLOR_PALETTES = {
-  babyPowder:   "#E6E2D7",
+  babyPowder:   "#F8F5EC",
+  boneWhite:   "#E6E2D7",
   blushingBride:"#E8A9B8",
   crushedBerry: "#7B3A4A",
   limeCream:    "#D8E8C2",

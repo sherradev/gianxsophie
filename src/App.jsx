@@ -193,7 +193,7 @@ const HeroSection = () => {
         <BotanicalRight style={{ transform: "scaleY(-1) translateY(-40px)" }} />
       </motion.div>
 
-      <motion.div style={{ opacity, textAlign: "center", zIndex: 2, padding: "80px 24px 60px" }}>
+      <motion.div style={{ opacity, textAlign: "center", zIndex: 2, padding: "10px 24px 60px" }}>
         {/* Pre-title */}
  
 
@@ -238,7 +238,7 @@ const HeroSection = () => {
         <motion.p
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 1 }}
           style={{ fontFamily: "'Jost', sans-serif", fontSize: 17, letterSpacing: "0.3em", 
-            textTransform: "uppercase", color: C.warmGrey, margin: "-20px 0 10px 25px" }}
+            textTransform: "uppercase", color: C.warmGrey, margin: "0 0 10px 25px" }}
         >
           are getting married
         </motion.p>
@@ -328,35 +328,81 @@ const DetailsSection = () => (
   </section>
 );
 
-// ─── Accordion ────────────────────────────────────────────────────────────────
+// ─── Accordion ──────────────────────────────────────────────────────────────── 
 const Accordion = ({ q, a, index }) => {
   const [open, setOpen] = useState(false);
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+      initial={{ opacity: 0, y: 20 }} 
+      whileInView={{ opacity: 1, y: 0 }} 
+      viewport={{ once: true }}
       transition={{ duration: 0.6, delay: index * 0.08 }}
       style={{ borderBottom: `1px solid ${C.blushingBride}55`, overflow: "hidden" }}
     >
+      {/* Wrapping the entire top area in the button. 
+         Adding a hover state makes it clear the WHOLE thing is clickable.
+      */}
       <button
         onClick={() => setOpen(v => !v)}
         style={{
-          width: "100%", textAlign: "left", background: "none", border: "none", cursor: "pointer",
-          display: "flex", justifyContent: "space-between", alignItems: "center",
+          width: "100%", 
+          textAlign: "left", 
+          background: "none", 
+          border: "none", position: "relative", 
+          cursor: "pointer",
+          display: "flex", 
+          justifyContent: "space-between", 
+          alignItems: "center",
           padding: "22px 0",
+          outline: "none",  
         }}
       >
-        <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 20, color: C.deepSlate, fontWeight: 400 }}>{q}</span>
-        <motion.span animate={{ rotate: open ? 45 : 0 }} transition={{ duration: 0.3 }}
-          style={{ color: C.blushingBride, fontSize: 22, lineHeight: 1, flexShrink: 0, marginLeft: 16 }}>+</motion.span>
+        <span style={{ 
+          fontFamily: "'Cormorant Garamond', serif", 
+          fontSize: 20, 
+          color: C.deepSlate, 
+          fontWeight: 400,
+          flexGrow: 1, // This ensures the text area takes up all space
+          paddingRight: "16px" // Keeps text from hitting the '+'
+        }}>
+          {q}
+        </span>
+        
+        <motion.span 
+          animate={{ rotate: open ? 45 : 0 }} 
+          transition={{ duration: 0.3 }}
+          style={{ 
+            color: C.blushingBride, 
+            fontSize: 22, 
+            lineHeight: 1, 
+            flexShrink: 0 
+          }}
+        >
+          +
+        </motion.span>
       </button>
+
       <AnimatePresence initial={false}>
         {open && (
           <motion.div
-            initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }}
+            initial={{ height: 0, opacity: 0 }} 
+            animate={{ height: "auto", opacity: 1 }} 
+            exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             style={{ overflow: "hidden" }}
           >
-            <p style={{ fontFamily: "'Jost', sans-serif", fontSize: 14, color: C.warmGrey, lineHeight: 1.8, paddingBottom: 20, margin: 0, letterSpacing: "0.02em" }}>{a}</p>
+            <p style={{ 
+              fontFamily: "'Jost', sans-serif", 
+              fontSize: 14, 
+              color: C.warmGrey, 
+              lineHeight: 1.8, 
+              paddingBottom: 20, 
+              margin: 0, 
+              letterSpacing: "0.02em" 
+            }}>
+              {a}
+            </p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -364,15 +410,15 @@ const Accordion = ({ q, a, index }) => {
   );
 };
 
+
+
 // ─── SECTION: FAQs ────────────────────────────────────────────────────────────
 const FAQsSection = () => {
   const faqs = [
-    { q: "When is the RSVP deadline?", a: "Please RSVP by December 25, 2023. This helps us finalise seating and catering. We appreciate your prompt response!" },
-    { q: "Is there parking available at the venue?", a: "Yes, Dumaguete City has ample parking available for all guests. Our team will be on hand to assist with directions on the day." },
-    { q: "Will there be a reception after the ceremony?", a: "Absolutely! Cocktails and a dinner reception will follow immediately after the ceremony. Please stay and celebrate with us!" },
+    { q: "When is the RSVP deadline?", a: "Please RSVP by September 25, 2026. This helps us finalise seating and catering. We appreciate your prompt response!" },
+    { q: "Will there be a reception after the ceremony?", a: "Absolutely! A dinner reception will follow immediately after the ceremony. Please stay and celebrate with us!" },
     { q: "Can I bring a plus-one?", a: "Your invitation will specify whether it is for one or two guests. If you are unsure, please reach out to us directly via the contact numbers below." },
-    { q: "What is the colour palette for the event?", a: "We are keeping things soft and romantic — dusty blue, sage green, blush, and hints of berry. Ladies are welcome to wear long gowns or cocktail dresses in these tones." },
-    { q: "Are children welcome?", a: "We love your little ones! Please indicate the number of children when you RSVP so we can ensure appropriate seating arrangements." },
+    { q: "Are children welcome?", a: "No, lol." },
   ];
 
   return (
